@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess My Number!</title>
+    <link rel="stylesheet" href="/guessNum.css">
+</head>
+<body>
+    <div id="contain">
+        <div id="upperbar">
+            <button id="restart">Restart Game</button>
+            <div id="setting">(Between 1 and 20)</div>
+        </div>
+        <div id="title">Guess My Number!</div>
+        <div id="outeranswer">
+            <div id="answerbox">?</div>
+        </div>
+        <div id="columnA">
+            <div id="column1">
+                <div id="slotholder">
+                    <input id="slot">
+                </div>
+            </div>
+            <div id="column2">
+                <div id="hintbox">waiting...</div>
+                <!-- I'm not sure how this 'score' system would work for this guessing game, so I will keep it here for the asthetic of the page, but none of the code involves these id tags -->
+                <div id="score">Score:</div>
+                <div id="highscore">Highscore:</div>
+            </div>
+        </div>
+        <div id="columnB">
+            <button id="btn">Check Answer!</button>
+        </div>
+    </div>
+    <script>
+        var num = Math.floor(Math.random()*20 +1);
+
+        var restrt = document.getElementById('restart');
+        restrt.addEventListener('click', restartGame);
+
+        var mybtn = document.getElementById('btn');
+        mybtn.addEventListener('click', submit);
+
+        function restartGame() {
+            document.body.style.backgroundColor = 'Gray';
+            var hint = document.getElementById('hintbox');
+            hint.textContent = 'waiting...';
+            document.getElementById('slot').value = ''
+            var answrbox = document.getElementById('answerbox');
+            answrbox.textContent = '?';
+            num = Math.floor(Math.random()*20 +1);
+        }
+
+        function submit() {
+            console.log(num)
+            var input = document.getElementById('slot');
+            var resultbox = document.getElementById('answerbox');
+            var hint = document.getElementById('hintbox');
+            resultbox.textContent = input.value;
+            if (input.value == num){
+                hint.textContent = 'CONGRATS!!';
+                document.body.style.backgroundColor = 'MediumSeaGreen';
+            }
+            else if(input.value < num){
+                hint.textContent = 'Too low!';
+                document.body.style.backgroundColor = 'Gray';
+
+            }
+            else if(input.value > num){
+                hint.textContent = 'Too high!';
+            }
+        }
+    </script>
+</body>
+</html>
